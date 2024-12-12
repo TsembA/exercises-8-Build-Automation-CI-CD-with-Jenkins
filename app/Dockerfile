@@ -1,7 +1,20 @@
 FROM node:20-alpine
-RUN mkdir -p /usr/app
-COPY . /usr/app
+
+# Create app directory
 WORKDIR /usr/app
-EXPOSE 3000
+
+# Copy package.json and package-lock.json first
+# This allows Docker to cache npm install if dependencies haven't changed
+COPY package.json package-lock.json ./
+
+# Install dependencies
 RUN npm install
+
+# Copy application code (excluding files in .dockerignore)
+COPY . .
+
+# Expose application port
+EXPOSE 3000
+
+# Start the application
 CMD ["node", "server.js"]
