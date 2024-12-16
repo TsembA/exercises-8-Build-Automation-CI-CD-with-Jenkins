@@ -45,9 +45,6 @@ pipeline {
                         sh 'git config --global user.email "tsembenhoi@gmail.com"'
                         sh 'git config --global user.name "TsembA"'
                         sh 'git remote set-url origin https://${USER}:${TOKEN}@github.com/TsembA/exercises-8-Build-Automation-CI-CD-with-Jenkins.git'
-                        sh '''
-                        git checkout jenkins-jobs || git checkout -b jenkins-jobs
-                        '''
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump" || echo "No changes to commit."'
                         sh 'git push origin HEAD:jenkins-jobs'
