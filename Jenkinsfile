@@ -38,5 +38,19 @@ pipeline {
                 }
             }
         }
+        stage ('COMMIT VERSION UPDATE') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'USER' passwordVariable: 'TOKEN')]) {
+                        sh 'git config --global user.email "tsembenhoi@gmail.com"'
+                        sh 'git config --global user.name "TsembA"'
+                        sh 'git remote set-url origin https://${USER}:${TOKEN}@github.com/TsembA/exercises-8-Build-Automation-CI-CD-with-Jenkins.git'
+                        sh 'git add .'
+                        sh 'git commit -m "ci: version bump"'
+                        sh 'git push origin jenkins-jobs'
+                    }
+                }
+            }
+        }
     }
 }
