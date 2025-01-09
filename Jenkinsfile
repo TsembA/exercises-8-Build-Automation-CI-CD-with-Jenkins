@@ -1,19 +1,10 @@
-def gv
+@Library('jenkins-shared-library') _
 
 pipeline {
     agent any
     tools {
         nodejs "node"
     }
-
-    stages {
-        stage("INIT GROOVY SCRIPT") {
-            steps {
-                script {
-                    gv = load "script.groovy"
-                }
-            }
-        }
 
         stage('INCREMENT VERSION') {
             steps {

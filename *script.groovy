@@ -9,6 +9,7 @@ def testApp() {
     sh "npm install"
     sh "npm run test"
 }
+
 def buildAndPushImage() {
     withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
         script {
@@ -36,4 +37,5 @@ def commitVersionUpdate() {
         }
     }
 }
+
 return this
