@@ -1,17 +1,18 @@
-@Library('jenkins-shared-library@shared-library') _
+#!/user/bin/env/ groovy
+@Library('jenkins-shared-library')
+def gv
 
 pipeline {
+
     agent any
     tools {
         nodejs "node"
     }
-
+    stages {
         stage('INCREMENT VERSION') {
             steps {
                 script {
-                    dir("app") {
-                        gv.incrementVersion()
-                    }
+                    incrementVersion()
                 }
             }
         }
@@ -19,9 +20,7 @@ pipeline {
         stage('RUN TEST') {
             steps {
                 script {
-                    dir("app") {
-                        gv.testApp()
-                    }
+                    testApp()
                 }
             }
         }
@@ -29,7 +28,7 @@ pipeline {
         stage('BUILD AND PUSH DOCKER IMAGE') {
             steps {
                 script {
-                    gv.buildAndPushImage()
+                    buildAndPushImage()
                 }
             }
         }
@@ -37,8 +36,9 @@ pipeline {
         stage('COMMIT VERSION UPDATE') {
             steps {
                 script {
-                    gv.commitVersionUpdate()
+                    commitVersionUpdate()
                 }
             }
         }
     }
+}
