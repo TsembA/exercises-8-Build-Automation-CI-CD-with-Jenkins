@@ -11,7 +11,7 @@ def commitVersionUpdate() {
                 git commit -m "ci: version bump"
                 git push origin HEAD:jenkins-jobs
             else
-                echo "No changes to commit."
+                echo "No changes to commit. Happy New Year"
             fi
             '''
         }
