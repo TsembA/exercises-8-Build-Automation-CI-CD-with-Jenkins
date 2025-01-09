@@ -1,25 +1,3 @@
-def incrementVersion() {
-    sh "npm version major"
-    def packageJson = readJSON file: 'package.json'
-    def version = packageJson.version
-    env.IMAGE_NAME = "${version}-${BUILD_NUMBER}"
-}
-
-def testApp() {
-    sh "npm install"
-    sh "npm run test"
-}
-
-def buildAndPushImage() {
-    withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-        script {
-            sh "docker build -t dancedevops/my-node-app:${IMAGE_NAME} -f Dockerfile ."
-            sh 'echo $PASS | docker login -u $USER --password-stdin'
-            sh "docker push dancedevops/my-node-app:${IMAGE_NAME}"
-        }
-    }
-}
-
 def commitVersionUpdate() {
     withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'USER', passwordVariable: 'TOKEN')]) {
         script {
@@ -37,5 +15,3 @@ def commitVersionUpdate() {
         }
     }
 }
-
-return this
