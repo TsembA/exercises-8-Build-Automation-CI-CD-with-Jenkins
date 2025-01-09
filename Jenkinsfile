@@ -6,15 +6,6 @@ pipeline {
         nodejs "node"
     }
 
-    stages {
-        stage("INIT GROOVY SCRIPT") {
-            steps {
-                script {
-                    gv = load "script.groovy"
-                }
-            }
-        }
-
         stage('INCREMENT VERSION') {
             steps {
                 script {
