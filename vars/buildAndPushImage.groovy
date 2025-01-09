@@ -1,3 +1,5 @@
+#!/user/bin/env/ groovy
+
 def buildAndPushImage() {
     withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
         script {

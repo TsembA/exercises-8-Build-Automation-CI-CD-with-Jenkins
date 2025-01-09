@@ -1,3 +1,5 @@
+#!/user/bin/env/ groovy
+
 def commitVersionUpdate() {
     withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'USER', passwordVariable: 'TOKEN')]) {
         script {

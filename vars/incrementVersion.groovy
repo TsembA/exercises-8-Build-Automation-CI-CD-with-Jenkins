@@ -1,3 +1,5 @@
+#!/user/bin/env/ groovy
+
 def incrementVersion() {
     sh "npm version major"
     def packageJson = readJSON file: 'package.json'
